@@ -1,0 +1,11 @@
+{
+  "empresa": "TechCorp Solutions",
+  "setor": "Tecnologia / B2B",
+  "porte": "Média Empresa (50 funcionários)",
+  "pilares": {
+    "Gestão Financeira": "Controle rígido de custos, mas sem previsibilidade de receita. DRE mensal atrasado.",
+    "Vendas e Comercial": "Time de 3 vendedores, sem CRM definido. Ciclo de vendas longo (6 meses).",
+    "Marketing e Tração": "Foco em Inbound Marketing, mas com baixa conversão de Leads para MQLs.",
+    "Operações e Processos": "Processos mapeados no papel, mas não seguidos pela equipe. Muito retrabalho na entrega do software."
+  }
+}
