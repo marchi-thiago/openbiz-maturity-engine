@@ -2,8 +2,7 @@ import os
 import json
 import markdown
 from dotenv import load_dotenv, find_dotenv
-from google import genai
-from google.genai import types
+from ai_provider import create_resilient_provider
 
 # Carrega as variáveis de ambiente
 load_dotenv()
@@ -98,7 +97,7 @@ def gerar_html(markdown_text, empresa):
     print("✅ Relatório HTML gerado com sucesso (pronto para exportar como PDF).")
 
 def main():
-    client = genai.Client()
+    provider = create_resilient_provider()
     
     system_prompt = (
         "Você é o motor de inteligência analítica do OpenBiz Maturity Engine, um projeto open-source "
@@ -148,13 +147,10 @@ def main():
         print(f"\nProcessando análise de {pilar} via LLM...")
         
         try:
-            response = client.models.generate_content(
-                model='gemini-3.5-flash',
+            response = provider.generate(
                 contents=prompt_usuario,
-                config=types.GenerateContentConfig(
-                    system_instruction=system_prompt,
-                    temperature=0.3,
-                ),
+                system_instruction=system_prompt,
+                temperature=0.3,
             )
             resposta_texto = response.text
             relatorio_final.append({"pilar": pilar, "analise": resposta_texto})
@@ -182,13 +178,10 @@ def main():
     """
     
     try:
-        response_sumario = client.models.generate_content(
-            model='gemini-3.5-flash',
+        response_sumario = provider.generate(
             contents=prompt_sumario,
-            config=types.GenerateContentConfig(
-                system_instruction=system_prompt,
-                temperature=0.4,
-            ),
+            system_instruction=system_prompt,
+            temperature=0.4,
         )
         sumario_texto = response_sumario.text
         print("✅ Sumário gerado!")

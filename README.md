@@ -27,11 +27,19 @@ source .venv/bin/activate  # No Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-3. Configure a Chave da API:
-Crie um arquivo `.env` na raiz do projeto com a sua chave da API do Google Gemini:
+3. Configure os provedores:
+Copie `.env.example` para `.env` e preencha somente as chaves dos provedores que você pretende usar:
 ```env
-GEMINI_API_KEY=sua_chave_aqui
+GEMINI_API_KEY=sua_chave_gemini
+ANTHROPIC_API_KEY=sua_chave_claude
+AI_PRIMARY_PROVIDER=gemini
+AI_FALLBACK_PROVIDER=claude
+AI_FALLBACK_ENABLED=false
 ```
+
+Os modelos padrão são `gemini-3.5-flash` e `claude-sonnet-4-20250514`. Eles podem ser substituídos por `AI_GEMINI_MODEL` e `AI_CLAUDE_MODEL` conforme a disponibilidade da conta e do ambiente. Para habilitar fallback, configure as duas chaves e altere `AI_FALLBACK_ENABLED` para `true`.
+
+Nunca versione `.env` nem coloque chaves em código, prompts, relatórios ou logs.
 
 ## 🚀 Como Usar
 
